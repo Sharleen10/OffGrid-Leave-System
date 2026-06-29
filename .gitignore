@@ -1,0 +1,32 @@
+# Dependency directories (never upload these, they are massive)
+node_modules/
+jspm_packages/
+web_modules/
+
+# Production build outputs (compiled code generated during deployment)
+dist/
+build/
+out/
+
+# Local environment / Secret config files (critical for security)
+.env
+.env.local
+.env.*.local
+.env.development
+.env.production
+
+# IDEs, text editors, and system files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+.DS_Store
+Thumbs.db
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs/
+*.log

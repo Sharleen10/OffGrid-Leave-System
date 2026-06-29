@@ -1,0 +1,26 @@
+{
+  "name": "leave-tracking-server",
+  "version": "1.0.0",
+  "description": "Backend for Intern Leave Tracking System",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "dependencies": {
+    "@supabase/server": "^1.1.0",
+    "@supabase/supabase-js": "^2.108.1",
+    "cors": "^2.8.6",
+    "dotenv": "^16.6.1",
+    "express": "^4.22.2",
+    "express-validator": "^7.0.1",
+    "helmet": "^7.0.0",
+    "morgan": "^1.10.0",
+    "multer": "^2.2.0",
+    "resend": "^1.0.0",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
