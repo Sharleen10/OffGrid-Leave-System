@@ -8,30 +8,85 @@ const emailRoutes = require('./routes/emailRoutes');
 
 const app = express();
 
-app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:5000'],
-  credentials: true,
-}));
-app.use(express.json());
+/**
+ * =========================
+ * CORS CONFIG (PRODUCTION SAFE)
+ * =========================
+ */
+const allowedOrigins = [
+  'http://localhost:3000',
+  process.env.FRONTEND_URL,
+];
 
-// Health check
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // Allow tools like Postman or server-to-server requests
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error('CORS blocked: Not allowed by server'));
+    },
+    credentials: true,
+  })
+);
+
+/**
+ * =========================
+ * MIDDLEWARE
+ * =========================
+ */
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+/**
+ * =========================
+ * HEALTH CHECK
+ * =========================
+ */
 app.get('/health', (req, res) => {
-  res.json({ status: 'OK', timestamp: new Date().toISOString() });
+  res.json({
+    status: 'OK',
+    message: 'Leave Management API is running',
+    timestamp: new Date().toISOString(),
+  });
 });
 
-// Routes
+/**
+ * =========================
+ * API ROUTES
+ * =========================
+ */
 app.use('/api/leave', leaveRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/email', emailRoutes);
 
-// Global error handler
+/**
+ * =========================
+ * GLOBAL ERROR HANDLER
+ * =========================
+ */
 app.use((err, req, res, next) => {
-  console.error('Unhandled error:', err);
-  res.status(500).json({ error: 'Internal server error' });
+  console.error('🔥 Server Error:', err.message || err);
+
+  res.status(err.status || 500).json({
+    success: false,
+    message: err.message || 'Internal server error',
+  });
 });
 
+/**
+ * =========================
+ * START SERVER
+ * =========================
+ */
 const PORT = process.env.PORT || 5000;
+
 app.listen(PORT, () => {
-  console.log(`\n🚀 Server running on port ${PORT}`);
-  console.log(`📍 Health: http://localhost:${PORT}/health\n`);
+  console.log(`🚀 Server running on port ${PORT}`);
+  console.log(`🔗 Health check: /health`);
+  console.log(`🌍 FRONTEND_URL: ${process.env.FRONTEND_URL || 'NOT SET'}`);
 });
