@@ -1,33 +1,44 @@
 const supabase = require('../config/database');
 
 class LeaveCalculator {
-  static async calculateAccruedDays(startDate, currentDate, leaveType) {
+  static async getQuotas() {
+    const { data } = await supabase
+      .from('system_config')
+      .select('config_key, config_value')
+      .in('config_key', ['annual_leave_allocation', 'sick_leave_allocation', 'study_leave_allocation', 'family_leave_allocation']);
+
+    const config = {};
+    (data || []).forEach(row => { config[row.config_key] = row.config_value; });
+
+    return {
+      annual: parseFloat(config.annual_leave_allocation) || 15,
+      sick: config.sick_leave_allocation === 'Unlimited' ? Infinity : (parseFloat(config.sick_leave_allocation) || 30),
+      study: parseFloat(config.study_leave_allocation) || 12,
+      family: parseFloat(config.family_leave_allocation) || 5,
+    };
+  }
+
+  static async calculateAccruedDays(startDate, currentDate, leaveType, quotas) {
     const start = new Date(startDate);
     const current = new Date(currentDate);
     
-    // Calculate months difference
     const monthsDiff = (current.getFullYear() - start.getFullYear()) * 12 +
       (current.getMonth() - start.getMonth());
     
     if (leaveType === 'annual') {
-      // 2.08 days per month for annual leave
-      return Math.max(0, monthsDiff * 2.08);
+      const monthlyRate = quotas.annual / 12;
+      return Math.max(0, monthsDiff * monthlyRate);
     } else {
-      // Default annual quotas for other leave types
-      const quotas = {
-        sick: 30, // 30 days per year
-        study: 12, // 12 days per year
-        family: 5, // 5 days per year
-      };
-      
-      // Calculate years difference
       const yearsDiff = current.getFullYear() - start.getFullYear();
-      return quotas[leaveType] * Math.max(0, yearsDiff);
+      const quota = quotas[leaveType];
+      if (quota === Infinity) return 999; // effectively unlimited, displayed separately
+      return quota * Math.max(0, yearsDiff);
     }
   }
   
   static async getUserLeaveBalance(userId) {
-    // Get user profile
+    const quotas = await this.getQuotas();
+
     const { data: profile } = await supabase
       .from('profiles')
       .select('employment_start_date')
@@ -36,14 +47,12 @@ class LeaveCalculator {
     
     if (!profile) throw new Error('User not found');
     
-    // Get all adjustments
     const { data: adjustments } = await supabase
       .from('audit_logs')
       .select('*')
       .eq('intern_id', userId)
       .order('created_at', { ascending: true });
     
-    // Get all approved leave requests
     const { data: approvedLeaves } = await supabase
       .from('leave_requests')
       .select('leave_type, days_requested')
@@ -54,35 +63,32 @@ class LeaveCalculator {
     const balance = {};
     
     for (const type of leaveTypes) {
-      // Calculate accrued days
       const accrued = await this.calculateAccruedDays(
         profile.employment_start_date,
         new Date(),
-        type
+        type,
+        quotas
       );
       
-      // Calculate adjustments
       const typeAdjustments = adjustments
         .filter(a => a.leave_type === type)
         .reduce((sum, a) => sum + a.value_changed, 0);
       
-      // Calculate taken days
       const taken = approvedLeaves
         .filter(l => l.leave_type === type)
         .reduce((sum, l) => sum + l.days_requested, 0);
       
       const current = accrued + typeAdjustments - taken;
       
-      // Get latest adjustment note
       const latestAdjustment = adjustments
         .filter(a => a.leave_type === type)
         .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))[0];
       
       balance[type] = {
-        accrued: Math.max(0, accrued),
-        adjustments: typeAdjustments,
-        taken: taken,
-        current: Math.max(0, current),
+        accrued: Math.round(Math.max(0, accrued) * 100) / 100,
+        adjustments: Math.round(typeAdjustments * 100) / 100,
+        taken: Math.round(taken * 100) / 100,
+        current: Math.round(Math.max(0, current) * 100) / 100,
         adjustmentNotes: latestAdjustment?.reason || null,
       };
     }
