@@ -142,7 +142,7 @@ const AdminShell = ({ activeTab, onTabChange, children, pendingCount = 0 }) => {
       {/* Desktop sidebar */}
       <aside className="hidden lg:flex lg:flex-col lg:w-64 bg-slate-900 px-3 py-6 shrink-0">
         <div className="px-3 mb-8">
-          <h1 className="text-lg font-semibold text-white tracking-tight">Leave Tracker</h1>
+          <h1 className="text-lg font-semibold text-white tracking-tight">OffGrid</h1>
           <p className="text-xs text-slate-400 mt-0.5">Admin workspace</p>
         </div>
         <nav className="flex-1 space-y-1 overflow-y-auto">
@@ -170,7 +170,7 @@ const AdminShell = ({ activeTab, onTabChange, children, pendingCount = 0 }) => {
 
       {/* Mobile top bar */}
       <div className="lg:hidden fixed top-0 inset-x-0 z-30 bg-slate-900 px-4 h-14 flex items-center justify-between">
-        <h1 className="text-base font-semibold text-white">Leave Tracker</h1>
+        <h1 className="text-base font-semibold text-white">OffGrid</h1>
         <button onClick={() => setMobileOpen(true)} className="text-slate-200 p-1">
           {ICONS.menu}
         </button>
@@ -183,7 +183,7 @@ const AdminShell = ({ activeTab, onTabChange, children, pendingCount = 0 }) => {
           <div className="absolute top-0 left-0 h-full w-72 bg-slate-900 px-3 py-5 flex flex-col">
             <div className="flex items-center justify-between px-3 mb-6">
               <div>
-                <h1 className="text-base font-semibold text-white">Leave Tracker</h1>
+                <h1 className="text-base font-semibold text-white">OffGrid</h1>
                 <p className="text-xs text-slate-400">Admin workspace</p>
               </div>
               <button onClick={() => setMobileOpen(false)} className="text-slate-300 p-1">

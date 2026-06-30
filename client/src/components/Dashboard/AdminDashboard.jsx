@@ -4,6 +4,8 @@ import AdminShell from '../Common/AdminShell';
 import { useAuth } from '../../hooks/useAuth';
 import AdminLeaveRequests from './AdminLeaveRequests';
 import AdminReports from './AdminReports';
+import AdminCalendar from './AdminCalendar';
+import AdminNotifications from './AdminNotifications';
 import toast from 'react-hot-toast';
 
 const AdminDashboard = () => {
@@ -293,17 +295,9 @@ const AdminDashboard = () => {
            
            {activeTab === 'reports' && <AdminReports />}
 
-          {activeTab === 'calendar' && (
-            <div className="bg-white rounded-lg border border-slate-200 p-8 text-center text-sm text-slate-400">
-              Company-wide Calendar — coming in Stage 2
-            </div>
-          )}
+            {activeTab === 'calendar' && <AdminCalendar />}
 
-          {activeTab === 'notifications' && (
-            <div className="bg-white rounded-lg border border-slate-200 p-8 text-center text-sm text-slate-400">
-              Notifications — coming in Stage 2
-            </div>
-          )}
+          {activeTab === 'notifications' && <AdminNotifications />}
 
           {activeTab === 'settings' && (
             <div className="bg-white rounded-lg border border-slate-200 p-8 text-center text-sm text-slate-400">
