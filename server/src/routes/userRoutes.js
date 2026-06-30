@@ -23,11 +23,18 @@ router.get('/profile', UserController.getMyProfile);
 // Update current user's profile
 router.put('/profile', UserController.updateMyProfile);
 
-// Add this line in userRoutes.js, near the other profile routes
+// Change own password
 router.put('/change-password', UserController.changeMyPassword);
 
-// Get departments list (admin only)
+// Departments list (admin only)
 router.get('/departments', requireRole(['admin']), UserController.getDepartments);
+
+// Admin summary stats
+router.get('/admin-summary', requireRole(['admin']), UserController.getAdminSummary);
+
+// System settings (admin only) — MUST be above /:id routes
+router.get('/settings', requireRole(['admin']), UserController.getSystemSettings);
+router.put('/settings', requireRole(['admin']), UserController.updateSystemSetting);
 
 // Admin only routes
 router.post(
@@ -37,6 +44,7 @@ router.post(
   UserController.createUser
 );
 
+// Dynamic :id routes go LAST since they catch everything else
 router.put(
   '/:id',
   requireRole(['admin']),
@@ -50,6 +58,9 @@ router.delete(
   UserController.deleteUser
 );
 
+router.put('/:id/deactivate', requireRole(['admin']), UserController.deactivateUser);
+router.put('/:id/reactivate', requireRole(['admin']), UserController.reactivateUser);
+
 // Password reset (admin triggered)
 router.post(
   '/reset-password',
@@ -57,14 +68,5 @@ router.post(
   validate(userValidation.resetPassword),
   UserController.resetPassword
 );
-
-router.get('/admin-summary', requireRole(['admin']), UserController.getAdminSummary);
-router.put('/:id/deactivate', requireRole(['admin']), UserController.deactivateUser);
-router.put('/:id/reactivate', requireRole(['admin']), UserController.reactivateUser);
-router.get('/settings', requireRole(['admin']), UserController.getSystemSettings);
-router.put('/settings', requireRole(['admin']), UserController.updateSystemSetting);
-router.put('/change-password', UserController.changeMyPassword);
-router.get('/departments', requireRole(['admin']), UserController.getDepartments);
-
 
 module.exports = router;
