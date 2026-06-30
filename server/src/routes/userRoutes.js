@@ -26,6 +26,9 @@ router.put('/profile', UserController.updateMyProfile);
 // Add this line in userRoutes.js, near the other profile routes
 router.put('/change-password', UserController.changeMyPassword);
 
+// Get departments list (admin only)
+router.get('/departments', requireRole(['admin']), UserController.getDepartments);
+
 // Admin only routes
 router.post(
   '/',
