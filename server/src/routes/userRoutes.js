@@ -64,7 +64,7 @@ router.put('/:id/reactivate', requireRole(['admin']), UserController.reactivateU
 router.get('/settings', requireRole(['admin']), UserController.getSystemSettings);
 router.put('/settings', requireRole(['admin']), UserController.updateSystemSetting);
 router.put('/change-password', UserController.changeMyPassword);
-
+router.get('/departments', requireRole(['admin']), UserController.getDepartments);
 
 
 module.exports = router;
