@@ -6,6 +6,7 @@ import AdminLeaveRequests from './AdminLeaveRequests';
 import AdminReports from './AdminReports';
 import AdminCalendar from './AdminCalendar';
 import AdminNotifications from './AdminNotifications';
+import AdminSettings from './AdminSettings';
 import toast from 'react-hot-toast';
 
 const AdminDashboard = () => {
@@ -299,11 +300,7 @@ const AdminDashboard = () => {
 
           {activeTab === 'notifications' && <AdminNotifications />}
 
-          {activeTab === 'settings' && (
-            <div className="bg-white rounded-lg border border-slate-200 p-8 text-center text-sm text-slate-400">
-              System Settings — coming in Stage 2
-            </div>
-          )}
+          {activeTab === 'settings' && <AdminSettings />}
 
           {activeTab === 'profile' && (
             <div className="max-w-md bg-white rounded-lg border border-slate-200 p-5">
