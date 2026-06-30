@@ -372,6 +372,23 @@ class UserController {
       res.status(500).json({ error: 'Failed to update setting', details: error.message });
     }
   }
+
+  static async getDepartments(req, res) {
+    try {
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('department')
+        .not('department', 'is', null);
+
+      if (error) throw error;
+
+      const unique = [...new Set(data.map(d => d.department).filter(Boolean))];
+      res.json(unique.sort());
+    } catch (error) {
+      console.error('Get departments error:', error);
+      res.status(500).json({ error: 'Failed to fetch departments', details: error.message });
+    }
+  }
 }
 
 module.exports = UserController;

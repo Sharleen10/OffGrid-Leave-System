@@ -45,6 +45,7 @@ export const leaveAPI = {
   getCompanyCalendar: () => api.get('/api/leave/admin/calendar'),
   getAdminReports: () => api.get('/api/leave/admin/reports'),
   getAdminNotifications: () => api.get('/api/leave/admin/notifications'),
+  getDepartments: () => api.get('/api/users/departments'),
 };
 
 export const userAPI = {
