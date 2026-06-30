@@ -825,6 +825,85 @@ class LeaveController {
       res.status(500).json({ error: 'Failed to export data' });
     }
   }
+
+  static async getAdminNotifications(req, res) {
+    try {
+      if (req.user.role !== 'admin') {
+        return res.status(403).json({ error: 'Access denied' });
+      }
+
+      const notifications = [];
+
+      // New pending leave requests (last 7 days)
+      const sevenDaysAgo = new Date();
+      sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+
+      const { data: recentRequests } = await supabase
+        .from('leave_requests')
+        .select('id, leave_type, created_at, intern:intern_id(full_name)')
+        .gte('created_at', sevenDaysAgo.toISOString())
+        .order('created_at', { ascending: false })
+        .limit(10);
+
+      (recentRequests || []).forEach(r => {
+        notifications.push({
+          id: `request-${r.id}`,
+          type: 'leave_request',
+          message: `${r.intern?.full_name || 'Someone'} submitted a ${r.leave_type} leave request`,
+          created_at: r.created_at,
+          icon: '📝',
+        });
+      });
+
+      // Overdue approvals (pending > 3 days)
+      const threeDaysAgo = new Date();
+      threeDaysAgo.setDate(threeDaysAgo.getDate() - 3);
+
+      const { data: overdueRequests } = await supabase
+        .from('leave_requests')
+        .select('id, leave_type, created_at, intern:intern_id(full_name)')
+        .eq('status', 'pending')
+        .lte('created_at', threeDaysAgo.toISOString())
+        .order('created_at', { ascending: true })
+        .limit(10);
+
+      (overdueRequests || []).forEach(r => {
+        notifications.push({
+          id: `overdue-${r.id}`,
+          type: 'overdue',
+          message: `${r.intern?.full_name || 'A'}'s ${r.leave_type} leave request is overdue for approval`,
+          created_at: r.created_at,
+          icon: '⏰',
+        });
+      });
+
+      // Recently created/updated accounts (last 7 days)
+      const { data: recentUsers } = await supabase
+        .from('profiles')
+        .select('id, full_name, role, created_at')
+        .gte('created_at', sevenDaysAgo.toISOString())
+        .order('created_at', { ascending: false })
+        .limit(10);
+
+      (recentUsers || []).forEach(u => {
+        notifications.push({
+          id: `user-${u.id}`,
+          type: 'user_created',
+          message: `${u.role === 'supervisor' ? 'Supervisor' : u.role === 'admin' ? 'Admin' : 'Intern'} account created for ${u.full_name}`,
+          created_at: u.created_at,
+          icon: u.role === 'supervisor' ? '👨‍💼' : '👤',
+        });
+      });
+
+      // Sort all by most recent first
+      notifications.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
+      res.json(notifications.slice(0, 30));
+    } catch (error) {
+      console.error('Get admin notifications error:', error);
+      res.status(500).json({ error: 'Failed to fetch notifications', details: error.message });
+    }
+  }
 }
 
 module.exports = LeaveController;

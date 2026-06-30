@@ -29,5 +29,6 @@ router.get('/admin/all-requests', requireRole(['admin']), LeaveController.getAll
 router.put('/admin/request/:id/override', requireRole(['admin']), LeaveController.adminOverrideStatus);
 router.get('/admin/calendar', requireRole(['admin']), LeaveController.getCompanyCalendar);
 router.get('/admin/reports', requireRole(['admin']), LeaveController.getAdminReportsData);
+router.get('/admin/notifications', requireRole(['admin']), LeaveController.getAdminNotifications);
 
 module.exports = router;

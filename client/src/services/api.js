@@ -44,6 +44,7 @@ export const leaveAPI = {
   adminOverrideStatus: (id, status, comments) => api.put(`/api/leave/admin/request/${id}/override`, { status, comments }),
   getCompanyCalendar: () => api.get('/api/leave/admin/calendar'),
   getAdminReports: () => api.get('/api/leave/admin/reports'),
+  getAdminNotifications: () => api.get('/api/leave/admin/notifications'),
 };
 
 export const userAPI = {
