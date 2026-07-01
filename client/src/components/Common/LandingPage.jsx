@@ -1,30 +1,41 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../../assets/logo.png'; // Adjust path if needed
+import logo from '../../assets/logo.png';
 
 const LandingPage = () => {
   return (
-    <div className="min-h-screen bg-[#0B0C0E] text-[#E4E4E7] font-sans antialiased flex flex-col overflow-x-hidden">
+    <div className="min-h-screen bg-[#06070B] text-[#F1F5F9] font-sans antialiased flex flex-col overflow-x-hidden selection:bg-blue-500/20 selection:text-blue-300">
       
+      {/* Top Banner Accent */}
+      <div className="w-full bg-[#0B0D16] border-b border-slate-900 px-6 py-2 flex justify-center items-center text-[10px] font-mono tracking-[0.2em] text-blue-400">
+        // AUTONOMOUS SUBSYSTEM INITIALIZED // NO CORE HR INTEGRATION REQUIRED
+      </div>
+
       {/* Navigation */}
-      <nav className="border-b border-white/[0.05] bg-[#0B0C0E]/80 backdrop-blur-md sticky top-0 z-50 transition-all duration-300">
+      <nav className="border-b border-slate-900 bg-[#06070B]/80 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-          <div className="flex justify-between h-20 items-center">
-            {/* Logo with scale-up hover */}
-            <div className="flex items-center transform transition-transform duration-300 hover:scale-105 cursor-pointer">
-              <img src={logo} alt="OffGrid Logo" className="h-12 w-auto object-contain invert" />
+          <div className="flex justify-between h-16 items-center">
+            
+            {/* Rigid Sharp Logo */}
+            <div className="flex items-center">
+              <img 
+                src={logo} 
+                alt="Logo" 
+                className="h-7 w-auto object-center"
+                style={{ imageRendering: '-webkit-optimize-contrast' }}
+              />
             </div>
             
-            {/* Navigation Actions */}
-            <div className="flex items-center space-x-6 sm:space-x-8">
-              <a href="#features" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors duration-200">
-                Features
+            {/* System Key Actions */}
+            <div className="flex items-center space-x-8 font-mono text-xs tracking-wider">
+              <a href="#matrix" className="text-slate-500 hover:text-slate-200 transition-colors">
+                [ INFRASTRUCTURE ]
               </a>
               <Link
                 to="/login"
-                className="text-sm font-medium text-white hover:text-green-400 transition-colors duration-200"
+                className="bg-blue-600 hover:bg-blue-500 text-white font-medium px-4 py-1.5 rounded-md transition-all shadow-md shadow-blue-600/10"
               >
-                Sign In
+                LAUNCH SUITE
               </Link>
             </div>
           </div>
@@ -32,99 +43,158 @@ const LandingPage = () => {
       </nav>
 
       <main className="flex-grow">
-        {/* Hero Section */}
-        <section className="relative pt-20 pb-24 lg:pt-32 lg:pb-36">
-          {/* Animated Background Glow Ambient Blurs */}
-          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[350px] bg-green-500/10 rounded-full blur-[120px] -z-10 animate-pulse duration-[6000ms]" />
-          <div className="absolute top-1/3 right-10 w-[250px] h-[250px] bg-emerald-500/5 rounded-full blur-[80px] -z-10 animate-bounce duration-[10000ms] hidden lg:block" />
+        {/* Architectural Hero */}
+        <section className="relative pt-24 pb-20 lg:pt-36 lg:pb-32">
+          {/* Subtle Ambient Depth Lighting */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-blue-500/[0.04] rounded-full blur-[130px] -z-10 animate-pulse duration-[8000ms]" />
 
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
+          <div className="max-w-4xl mx-auto px-6 text-center">
             
-            {/* Subtitle Tag with Fade-In slide animation */}
-            <div className="inline-flex items-center bg-white/[0.04] border border-white/[0.08] rounded-full px-4 py-1.5 mb-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
-              <span className="w-2 h-2 rounded-full bg-green-500 animate-ping mr-2.5" />
-              <span className="text-xs font-medium tracking-wide text-neutral-300">Intern Leave Tracking System</span>
+            {/* System Status Tag */}
+            <div className="inline-flex items-center gap-2 bg-[#0E111A] border border-slate-800 px-3 py-1 rounded-md font-mono text-[10px] tracking-widest text-slate-400 mb-8">
+              <span className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse" />
+              STANDALONE REPOSITORY / COHORT-SPECIFIC
             </div>
 
-            {/* Clear Premium Headline with staggered entry animation */}
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.15] max-w-4xl mx-auto animate-in fade-in slide-in-from-bottom-6 delay-100 duration-1000">
-              Manage your team's leave, <br />
-              <span className="bg-gradient-to-r from-green-400 via-emerald-400 to-teal-400 bg-clip-text text-transparent bg-[size:200%_auto] animate-pulse">
-                completely hassle-free.
+            {/* Sharp Bold Typographic Polish */}
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-semibold tracking-tight text-white leading-[1.1]">
+              Track intern leave. <br />
+              <span className="font-light bg-gradient-to-r from-slate-200 via-slate-400 to-slate-600 bg-clip-text text-transparent">
+                Skip the corporate IT queue.
               </span>
             </h1>
 
-            {/* Accessible Description */}
-            <p className="mt-8 text-lg sm:text-xl text-neutral-400 max-w-2xl mx-auto font-light leading-relaxed animate-in fade-in duration-1000 delay-300">
-              A powerful, centralized platform designed for administrators, supervisors, and interns to manage time-off requests easily and track real-time attendance.
+            {/* Problem-Solving Specific Subtext */}
+            <p className="mt-8 text-base sm:text-lg text-slate-400 max-w-2xl mx-auto font-light leading-relaxed tracking-wide">
+              Temporary cohorts don't need costly enterprise accounts on the company’s main active directory. OffGrid provides a sleek, standalone platform designed specifically to onboard interns, log requests, and process supervisor handoffs instantly.
             </p>
 
-            {/* Dynamic Interactive Call-To-Action Row */}
-            <div className="mt-12 flex flex-col sm:flex-row justify-center items-center gap-4 animate-in fade-in duration-1000 delay-500">
+            {/* Industrial Button Cluster */}
+            <div className="mt-12 flex flex-col sm:flex-row justify-center items-center gap-4 font-mono text-xs tracking-wider">
               <Link
                 to="/login"
-                className="w-full sm:w-auto inline-flex items-center justify-center bg-green-500 hover:bg-green-400 text-black text-base font-semibold px-8 py-4 rounded-xl shadow-lg shadow-green-500/10 hover:shadow-green-500/20 transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
+                className="w-full sm:w-auto bg-[#F8FAFC] hover:bg-[#E2E8F0] text-[#020617] font-semibold px-8 py-4 rounded-md transition-all text-center"
               >
-                Get Started for Free
+                ACCESS WORKSPACE
               </Link>
               <a
-                href="#features"
-                className="w-full sm:w-auto inline-flex items-center justify-center bg-white/[0.02] hover:bg-white/[0.08] text-white text-base font-semibold px-8 py-4 rounded-xl border border-white/[0.08] transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
+                href="#matrix"
+                className="w-full sm:w-auto bg-[#0E111A] text-slate-400 hover:text-white border border-slate-800 px-8 py-4 rounded-md transition-all text-center"
               >
-                Learn More
+                EXPLORE FRAMEWORK
               </a>
             </div>
 
           </div>
         </section>
 
-        {/* Features Block */}
-        <section id="features" className="bg-[#111215] border-t border-white/[0.05] py-20 lg:py-28">
+        {/* Feature Matrix & Live Workspace Simulation Preview */}
+        <section id="matrix" className="bg-[#090A0F] border-t border-slate-900 py-24 lg:py-32">
           <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
             
-            <div className="text-center max-w-3xl mx-auto mb-16 lg:mb-20">
-              <h2 className="text-3xl font-bold text-white tracking-tight sm:text-4xl">
-                One platform. Three custom dashboards.
-              </h2>
-              <p className="mt-4 text-lg text-neutral-400">
-                Tailored views designed specifically to make everyone's jobs faster and easier.
-              </p>
-            </div>
-
-            {/* Smooth Hover Card Grids */}
-            <div className="grid gap-8 md:grid-cols-3">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
               
-              {/* Card 1: Admin */}
-              <div className="group bg-[#16171C] border border-white/[0.04] rounded-2xl p-8 hover:border-green-500/30 transform hover:-translate-y-2 hover:bg-[#191b22] transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-black/40">
-                <div className="w-12 h-12 rounded-xl bg-green-500/10 border border-green-500/20 text-green-400 flex items-center justify-center text-xl font-bold mb-6 group-hover:scale-110 group-hover:bg-green-500 group-hover:text-black transition-all duration-300">
-                  A
+              {/* Left Column Text (Spans 2 columns on desktop) */}
+              <div className="lg:col-span-2 space-y-8">
+                <div className="border-l border-blue-500 pl-4">
+                  <span className="text-[10px] font-mono tracking-[0.3em] text-blue-400 uppercase block mb-1">Architecture Rules</span>
+                  <h2 className="text-3xl font-bold text-white tracking-tight">
+                    Isolated tracking logic.
+                  </h2>
                 </div>
-                <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-green-400 transition-colors duration-200">Admin Dashboard</h3>
-                <p className="text-neutral-400 text-sm leading-relaxed font-light">
-                  Full system oversight. Manage user accounts, customize global leave policies, and view immutable audit logs anytime.
+                
+                <p className="text-slate-400 font-light text-sm leading-relaxed">
+                  Because interns exist outside your main system architecture, keeping manual spreadsheet rows updated is an operational nightmare. OffGrid completely automates the process through independent micro-modules.
                 </p>
+
+                <div className="space-y-6">
+                  {/* Miniature Bullet Feature 1 */}
+                  <div className="flex gap-4">
+                    <div className="w-5 h-5 rounded-md bg-blue-500/10 text-blue-400 flex items-center justify-center font-mono text-[10px] shrink-0 font-bold">1</div>
+                    <div>
+                      <h4 className="text-sm font-semibold text-slate-200 mb-1">Dynamic Cohort Onboarding</h4>
+                      <p className="text-xs text-slate-400 font-light leading-relaxed">Set explicit contract boundaries, assign custom leave balances, and map direct supervisors in seconds.</p>
+                    </div>
+                  </div>
+
+                  {/* Miniature Bullet Feature 2 */}
+                  <div className="flex gap-4">
+                    <div className="w-5 h-5 rounded-md bg-blue-500/10 text-blue-400 flex items-center justify-center font-mono text-[10px] shrink-0 font-bold">2</div>
+                    <div>
+                      <h4 className="text-sm font-semibold text-slate-200 mb-1">Instant Balance Recalculation</h4>
+                      <p className="text-xs text-slate-400 font-light leading-relaxed">Asynchronous ledger updates instantly deduct available time-off blocks the moment an entry gets approved.</p>
+                    </div>
+                  </div>
+
+                  {/* Miniature Bullet Feature 3 */}
+                  <div className="flex gap-4">
+                    <div className="w-5 h-5 rounded-md bg-blue-500/10 text-blue-400 flex items-center justify-center font-mono text-[10px] shrink-0 font-bold">3</div>
+                    <div>
+                      <h4 className="text-sm font-semibold text-slate-200 mb-1">Frictionless Supervisor Pipeline</h4>
+                      <p className="text-xs text-slate-400 font-light leading-relaxed">Managers process rows, write rejection tags, and clear cross-team calendar conflicts through a private hub.</p>
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              {/* Card 2: Supervisor */}
-              <div className="group bg-[#16171C] border border-white/[0.04] rounded-2xl p-8 hover:border-green-500/30 transform hover:-translate-y-2 hover:bg-[#191b22] transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-black/40">
-                <div className="w-12 h-12 rounded-xl bg-green-500/10 border border-green-500/20 text-green-400 flex items-center justify-center text-xl font-bold mb-6 group-hover:scale-110 group-hover:bg-green-500 group-hover:text-black transition-all duration-300">
-                  S
+              {/* Right Column Layout Preview (Spans 3 columns on desktop) */}
+              <div className="lg:col-span-3 bg-[#0E111A] border border-slate-800/80 rounded-xl p-6 shadow-2xl relative overflow-hidden group">
+                
+                {/* Decorative UI Window Controls */}
+                <div className="flex items-center gap-1.5 mb-6 pb-4 border-b border-slate-800/60 text-xs font-mono text-slate-500">
+                  <span className="w-2.5 h-2.5 rounded-full bg-slate-800" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-slate-800" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-slate-800" />
+                  <span className="ml-2 text-[10px] text-slate-600">// INTERN_MONITOR_PANEL</span>
                 </div>
-                <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-green-400 transition-colors duration-200">Supervisor Hub</h3>
-                <p className="text-neutral-400 text-sm leading-relaxed font-light">
-                  Quickly review team calendars, approve or deny requests in a single click, and keep track of overall department capacity.
-                </p>
-              </div>
 
-              {/* Card 3: Intern */}
-              <div className="group bg-[#16171C] border border-white/[0.04] rounded-2xl p-8 hover:border-green-500/30 transform hover:-translate-y-2 hover:bg-[#191b22] transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-black/40">
-                <div className="w-12 h-12 rounded-xl bg-green-500/10 border border-green-500/20 text-green-400 flex items-center justify-center text-xl font-bold mb-6 group-hover:scale-110 group-hover:bg-green-500 group-hover:text-black transition-all duration-300">
-                  I
+                {/* Simulated UI Content Block */}
+                <div className="space-y-4 font-mono text-xs">
+                  
+                  {/* Simulated Row 1 */}
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-3 rounded bg-slate-900/40 border border-slate-800/30 gap-2">
+                    <div className="flex items-center gap-3">
+                      <div className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+                      <span className="text-slate-300">Alex Tan (Marketing Intern)</span>
+                    </div>
+                    <div className="flex items-center gap-4 text-[11px]">
+                      <span className="text-slate-500">Sick Leave (2 Days)</span>
+                      <span className="text-amber-400/90 bg-amber-500/5 border border-amber-500/20 px-2 py-0.5 rounded">PENDING</span>
+                    </div>
+                  </div>
+
+                  {/* Simulated Row 2 */}
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-3 rounded bg-slate-900/40 border border-slate-800/30 gap-2">
+                    <div className="flex items-center gap-3">
+                      <div className="w-2 h-2 rounded-full bg-emerald-500" />
+                      <span className="text-slate-300">John Doe (Dev Intern)</span>
+                    </div>
+                    <div className="flex items-center gap-4 text-[11px]">
+                      <span className="text-slate-500">Annual Leave (1 Day)</span>
+                      <span className="text-emerald-400 bg-emerald-500/5 border border-emerald-500/20 px-2 py-0.5 rounded">APPROVED</span>
+                    </div>
+                  </div>
+
+                  {/* Simulated Row 3 */}
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-3 rounded bg-slate-900/40 border border-slate-800/30 gap-2">
+                    <div className="flex items-center gap-3">
+                      <div className="w-2 h-2 rounded-full bg-rose-500" />
+                      <span className="text-slate-300">Sarah Jenkins (Design Intern)</span>
+                    </div>
+                    <div className="flex items-center gap-4 text-[11px]">
+                      <span className="text-slate-500">Casual Leave (3 Days)</span>
+                      <span className="text-rose-400 bg-rose-500/5 border border-rose-500/20 px-2 py-0.5 rounded">REJECTED</span>
+                    </div>
+                  </div>
+
                 </div>
-                <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-green-400 transition-colors duration-200">Intern Portal</h3>
-                <p className="text-neutral-400 text-sm leading-relaxed font-light">
-                  Submit time-off requests instantly, check your remaining balances, and view your complete request history seamlessly.
-                </p>
+
+                {/* Ambient Decorative Graphic */}
+                <div className="mt-6 pt-4 border-t border-slate-800/60 flex justify-between items-center text-[10px] font-mono text-slate-500">
+                  <span>ACTIVE COHORT SIZE: 14 PARTICIPANTS</span>
+                  <span>SUPABASE DATALINK: 200 OK</span>
+                </div>
+
               </div>
 
             </div>
@@ -133,13 +203,13 @@ const LandingPage = () => {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-white/[0.05] bg-[#0B0C0E] py-10 text-xs text-neutral-500">
+      <footer className="border-t border-slate-900 bg-[#06070B] py-10 text-[10px] font-mono tracking-widest text-slate-600">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <div className="font-semibold text-neutral-400 tracking-wider uppercase text-[10px]">
-            OffGrid Systems Designed by Sharleen &copy; {new Date().getFullYear()}
+          <div className="text-slate-400 uppercase">
+            Designed by Sharleen &copy; {new Date().getFullYear()}
           </div>
-          <div>
-            &copy; {new Date().getFullYear()} OffGrid. All rights reserved.
+          <div className="uppercase">
+            [ OffGrid Core Instance &copy; {new Date().getFullYear()}]
           </div>
         </div>
       </footer>
