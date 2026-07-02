@@ -135,6 +135,8 @@ class UserController {
         redirectTo: `${process.env.FRONTEND_URL}/reset-password`,
       });
       
+      console.log('Supabase response:', { data, error });
+      
       if (error) throw error;
       
       res.json({ message: 'Password reset email sent successfully' });
