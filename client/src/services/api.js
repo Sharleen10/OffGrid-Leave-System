@@ -45,7 +45,6 @@ export const leaveAPI = {
   getCompanyCalendar: () => api.get('/api/leave/admin/calendar'),
   getAdminReports: () => api.get('/api/leave/admin/reports'),
   getAdminNotifications: () => api.get('/api/leave/admin/notifications'),
-  getDepartments: () => api.get('/api/users/departments'),
 };
 
 export const userAPI = {
@@ -60,6 +59,7 @@ export const userAPI = {
   reactivateUser: (id) => api.put(`/api/users/${id}/reactivate`),
   getSystemSettings: () => api.get('/api/users/settings'),
   updateSystemSetting: (key, value) => api.put('/api/users/settings', { key, value }),
+  getDepartments: () => api.get('/api/users/departments'), // moved here from leaveAPI
 };
 
 export default api;
